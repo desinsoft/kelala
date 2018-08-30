@@ -39,7 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             throws Exception
     {
         http.requestMatchers().and().authorizeRequests()
-                .antMatchers("/user/**", "/api-docs/**","/oauth/token","/customer/account-register")
+                .antMatchers("/user/**", "/api-docs/**","/oauth/token")
                 .permitAll()
                 .antMatchers("/**")
                 .authenticated();
