@@ -1,6 +1,7 @@
 package com.desin.kelala.restkelala.service.impl;
 
 import com.desin.kelala.restkelala.authentihication.MyUserDetails;
+import com.desin.kelala.restkelala.entity.Privilege;
 import com.desin.kelala.restkelala.entity.User;
 import com.desin.kelala.restkelala.repository.UserRepository;
 import com.desin.kelala.restkelala.response.Answer;
@@ -34,7 +35,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             LOG.info("No se puedo obtener el usuario");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getMenu())));
+        List<Privilege> privileges = new ArrayList<>();
+        user.getRoles().forEach(
+            role -> {
+                authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+                role.getPrivileges().stream().map(p -> new SimpleGrantedAuthority(p.getName())).forEach(authorities::add);
+            }
+        );
         UserDetails userDetails = new MyUserDetails(user, new HashSet<>(authorities));
         return userDetails;
     }

@@ -14,7 +14,7 @@ public class User {
     private String password;
     private String name;
     private String lastName;
-    private List<Menu> roles;
+    private List<Role> roles;
 
     public String getId() {
         return id;
@@ -56,11 +56,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Menu> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Menu> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

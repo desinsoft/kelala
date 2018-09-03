@@ -20,6 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //@PreAuthorize("hasAuthority('WEB_ADMIN')")
     @PostMapping("user/saveUser")
     public @ResponseBody Answer saveUser(@RequestBody User user){
         LOG.info("[userController][saveUser] -> Inicio");
